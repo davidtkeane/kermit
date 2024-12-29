@@ -2,6 +2,17 @@
 
 This project brings the iconic Kermit the Frog to your screen with a fullscreen animated GIF and looping MP3 audio. It's a fun little application that demonstrates how to combine multimedia elements using Python.
 
+**Run the Script:**
+    A: Firstly, Install the dependencies in the requirements.txt file.
+    
+    ```bash
+    pip install -r requirements.txt
+    ```
+    B: Now all you do is fun the Kermit script!
+
+    ```bash
+    python kermit.py
+    ```
 ## Password
 
 *   The application will launch in fullscreen mode, displaying the animated GIF and playing the sound.
@@ -12,11 +23,11 @@ This project brings the iconic Kermit the Frog to your screen with a fullscreen 
 
 Here's a glimpse of what you'll see (make sure you're viewing this on GitHub to see the animation):
 
-![Kermit the Frog](kermit.gif)
+![Kermit the Frog](files/kermit.gif)
 
 ## Audio
 
-You can listen to the Kermit the Frog sound here: [kermit.mp3](kermit.mp3)
+You can listen to the Kermit the Frog sound here: [kermit.mp3](files/kermit.mp3)
 
 [Listen on External Host](https://www.example-audio-host.com/kermit-audio)
 
@@ -57,6 +68,13 @@ You can listen to the Kermit the Frog sound here: [kermit.mp3](kermit.mp3)
     *   `kermit.gif`: The animated GIF of Kermit the Frog (the one displayed above!).
 
 2.  **Run the Script:**
+    A: Firstly, Install the dependencies in the requirements.txt file.
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+    B: Now all you do is fun the Kermit script!
+
     ```bash
     python kermit.py
     ```

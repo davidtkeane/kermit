@@ -1,3 +1,6 @@
+#!/Users/ranger/.pyenv/shims/python3
+# Created by Ranger
+
 import pygame
 import tkinter as tk
 from PIL import Image, ImageTk, ImageSequence
@@ -10,10 +13,11 @@ SOUND_FILE = "files/kermit.mp3"
 IMAGE_FILE = "files/kermit.gif"
 
 SECRET_KEY_COMBINATION = {
-    "<Control_L>",  # Left Control
-    "<Meta_L>",     # Left Command (macOS)
+    "<Control_L>",  # Left Control (Control) ⌃ (macOS)
+    "<Meta_L>",     # Left Command (Command) ⌘ (macOS) 
     "<Shift_L>",    # Left Shift
 }
+
 MESSAGE_DURATION = 3  # Seconds for the message to display
 
 class KermitApp:
