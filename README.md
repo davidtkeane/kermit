@@ -8,24 +8,33 @@ Here's a glimpse of what you'll see (make sure you're viewing this on GitHub to 
 
 ![Kermit the Frog](files/kermit.gif)
 
-**Running and Setup of the Script:**
+**Quick Setup and Running and Setup of the Script - See more info below:**
 
 A: Firstly, Install the dependencies in the requirements.txt file.
     
-    ```bash
-    pip install -r requirements.txt
-    ```
+```bash
+pip install -r requirements.txt
+```
 B: Now all you do is fun the Kermit script!
 
-    ```bash
-    python kermit.py
-    ```
+```bash
+python kermit.py
+```
 
 ## Password
 
 *   The application will launch in fullscreen mode, displaying the animated GIF and playing the sound.
 *   Press any key (except Control, Command, and Shift together) to see the "What's the Secret?" message for 3 seconds.
 *   To exit, press **(Command) ⌘ + (Control) ⌃ + Left Shift** simultaneously. I have no idea how to stop if you forget the keys!
+
+## Pause
+
+*   The application will launch in fullscreen mode, displaying the animated GIF and playing the sound.
+*   To pause/unpause, press **(Command) ⌘ + (Control) ⌃ + p** simultaneously. 
+
+## Volume 
+
+*   You can use the up and down arrows to increase and decrease the volume.
 
 ## Audio
 
@@ -46,15 +55,23 @@ You can listen to the Kermit the Frog sound here: [kermit.mp3](files/kermit.mp3)
 ## Features
 
 *   **Fullscreen Animated GIF Display:** Showcases a fullscreen, looping, animated GIF of Kermit the Frog (as you can see above!). The image is automatically scaled to fit your screen while maintaining its original aspect ratio.
+
 *   **Looping MP3 Audio:** Plays a Kermit the Frog MP3 sound file in a continuous loop.
-*   **Secret Exit Combination:** Provides a hidden way to exit the application by pressing a specific key combination: **Control + Command + Shift** (on macOS).
+
+*   **Secret Exit Combination:** Provides a hidden way to exit the application by pressing a specific key combination: 
+
+**Control + Command + Shift** (on macOS).
+
 *   **Interactive Message:** Displays a "What's the Secret?" message for 3 seconds when any key (other than the secret exit combination) is pressed.
+
 *   **Hidden Mouse Cursor:** Hides the mouse cursor while the application is running in fullscreen mode.
 
 ## Requirements
 
 *   **Python 3:** This project is written in Python 3. Make sure you have Python 3 installed on your system. You can check your Python version by running `python --version` or `python3 --version` in your terminal.
+
 *   **Libraries:**
+
     *   **pygame:** Used for audio playback.
     *   **Pillow (PIL):** Used for image processing and handling the animated GIF.
     *   **tkinter:** Used for creating the fullscreen window and handling user input.
@@ -76,10 +93,12 @@ You can listen to the Kermit the Frog sound here: [kermit.mp3](files/kermit.mp3)
 ## Usage
 
 1.  **Place Files:** Ensure that the following files are in the same directory as the `kermit.py` script:
+
     *   `kermit.mp3`: The Kermit the Frog audio file.
     *   `kermit.gif`: The animated GIF of Kermit the Frog (the one displayed above!).
 
 2.  **Run the Script:**
+
     A: Firstly, Install the dependencies in the requirements.txt file.
 
     ```bash
