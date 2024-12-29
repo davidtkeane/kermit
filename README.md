@@ -10,12 +10,12 @@ Here's a glimpse of what you'll see (make sure you're viewing this on GitHub to 
 
 **Running and Setup of the Script:**
 
-    A: Firstly, Install the dependencies in the requirements.txt file.
+A: Firstly, Install the dependencies in the requirements.txt file.
     
     ```bash
     pip install -r requirements.txt
     ```
-    B: Now all you do is fun the Kermit script!
+B: Now all you do is fun the Kermit script!
 
     ```bash
     python kermit.py
