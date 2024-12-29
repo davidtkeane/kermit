@@ -40,9 +40,7 @@ You can listen to the Kermit the Frog sound here: [kermit.mp3](files/kermit.mp3)
 ![GitHub commit status](https://img.shields.io/github/checks-status/davidtkeane/kermit/fff3b211e20881582eeea4e035dcdd452548ed7a)
 ![GitHub Sponsors](https://img.shields.io/github/sponsors/davidtkeane)
 ![Python](https://img.shields.io/badge/Python-3.7%2B-blue)  
-![License](https://img.shields.io/badge/License-MIT-green)  
-![Gmail CLI](https://img.shields.io/badge/Gmail-CLI-red?style=flat&logo=gmail&logoColor=white&labelColor=gray) 
-![Gmail Python CLI](https://img.shields.io/badge/Gmail-Python%20CLI-blue?style=flat&logo=gmail&logoColor=white&labelColor=red)
+![License](https://img.shields.io/badge/License-MIT-green)  ![Gmail CLI](https://img.shields.io/badge/Gmail-CLI-red?style=flat&logo=gmail&logoColor=white&labelColor=gray) ![Gmail Python CLI](https://img.shields.io/badge/Gmail-Python%20CLI-blue?style=flat&logo=gmail&logoColor=white&labelColor=red)
 
 
 ## Features
