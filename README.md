@@ -2,7 +2,14 @@
 
 This project brings the iconic Kermit the Frog to your screen with a fullscreen animated GIF and looping MP3 audio. It's a fun little application that demonstrates how to combine multimedia elements using Python.
 
-**Run the Script:**
+## Preview
+
+Here's a glimpse of what you'll see (make sure you're viewing this on GitHub to see the animation):
+
+![Kermit the Frog](files/kermit.gif)
+
+**Running and Setup of the Script:**
+
     A: Firstly, Install the dependencies in the requirements.txt file.
     
     ```bash
@@ -13,23 +20,31 @@ This project brings the iconic Kermit the Frog to your screen with a fullscreen 
     ```bash
     python kermit.py
     ```
+
 ## Password
 
 *   The application will launch in fullscreen mode, displaying the animated GIF and playing the sound.
 *   Press any key (except Control, Command, and Shift together) to see the "What's the Secret?" message for 3 seconds.
-*   To exit, press **(Command) ⌘ + (Control) ⌃ + Left Shift** simultaneously. 
-
-## Preview
-
-Here's a glimpse of what you'll see (make sure you're viewing this on GitHub to see the animation):
-
-![Kermit the Frog](files/kermit.gif)
+*   To exit, press **(Command) ⌘ + (Control) ⌃ + Left Shift** simultaneously. I have no idea how to stop if you forget the keys!
 
 ## Audio
 
 You can listen to the Kermit the Frog sound here: [kermit.mp3](files/kermit.mp3)
 
 [Listen on External Host](https://www.example-audio-host.com/kermit-audio)
+
+
+![GitHub last commit](https://img.shields.io/github/last-commit/davidtkeane/kermit?style=flat-square)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/w/davidtkeane/kermit?authorFilter=davidtkeane)
+![GitHub issues](https://img.shields.io/github/issues-raw/davidtkeane/kermit?style=flat-square)
+![Go Version](https://img.shields.io/github/go-mod/go-version/davidtkeane/kermit)
+![GitHub commit status](https://img.shields.io/github/checks-status/davidtkeane/kermit/fff3b211e20881582eeea4e035dcdd452548ed7a)
+![GitHub Sponsors](https://img.shields.io/github/sponsors/davidtkeane)
+![Python](https://img.shields.io/badge/Python-3.7%2B-blue)  
+![License](https://img.shields.io/badge/License-MIT-green)  
+![Gmail CLI](https://img.shields.io/badge/Gmail-CLI-red?style=flat&logo=gmail&logoColor=white&labelColor=gray) 
+![Gmail Python CLI](https://img.shields.io/badge/Gmail-Python%20CLI-blue?style=flat&logo=gmail&logoColor=white&labelColor=red)
+
 
 ## Features
 
