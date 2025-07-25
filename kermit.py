@@ -125,9 +125,13 @@ class KermitApp:
             pygame.mixer.music.set_volume(new_volume)
 
     def on_key_press(self, event):
+        if event.keysym in ["<Command>", "<Tab>"]:
+            return
+        
         self.pressed_keys.add(event.keysym)
         self.check_secret_combination()
         self.check_pause_combination()
+        # self.on_any_key_press(event)  # Call this method to handle any other key presses
 
     def on_key_release(self, event):
         if event.keysym in self.pressed_keys:

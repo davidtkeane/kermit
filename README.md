@@ -1,6 +1,17 @@
-# Kermit the Frog Multimedia Experience
+# Kermit the Frog Screen Lock Experience
 
+<p align="left">
 This project brings the iconic Kermit the Frog to your screen with a fullscreen animated GIF and looping MP3 audio. It's a fun little application that demonstrates how to combine multimedia elements using Python.
+
+[![Kermit ScreenSaver](https://img.shields.io/badge/kermit-screensaver-blue)](https://github.com/davidtkeane/kermit)
+
+![Python](https://img.shields.io/badge/Python-3.7%2B-blue) ![License](https://img.shields.io/badge/License-MIT-green) 
+![Version](https://img.shields.io/badge/Version-2.0-orange)
+
+![GitHub last commit](https://img.shields.io/github/last-commit/davidtkeane/kermit?style=flat-square)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/w/davidtkeane/kermit?authorFilter=davidtkeane)
+![GitHub issues](https://img.shields.io/github/issues-raw/davidtkeane/kermit?style=flat-square)
+![GitHub commit status](https://img.shields.io/github/checks-status/davidtkeane/kermit/fff3b211e20881582eeea4e035dcdd452548ed7a)
 
 ## Preview
 
@@ -8,7 +19,13 @@ Here's a glimpse of what you'll see (make sure you're viewing this on GitHub to 
 
 ![Kermit the Frog](files/kermit.gif)
 
-**Quick Setup and Running and Setup of the Script - See more info below:**
+### Badges
+
+![Windows-Badge](https://img.shields.io/badge/Microsoft-Windows%2011-0078D6?logo=windows&logoColor=0078D6&labelColor=white)
+![AppleMac-Badge](https://img.shields.io/badge/Apple-macOS-000000?logo=apple&logoColor=white&labelColor=black)
+![Linux-Badge](https://img.shields.io/badge/Linux-FCC624?logo=linux&logoColor=black&labelColor=white)
+
+## Quick Setup and Running and Setup of the Script - See more info below:
 
 A: Firstly, Install the dependencies in the requirements.txt file.
     
@@ -20,6 +37,10 @@ B: Now all you do is fun the Kermit script!
 ```bash
 python kermit.py
 ```
+
+### Time @ Work!
+
+[![CodeTime Badge](https://img.shields.io/endpoint?style=social&color=222&url=https%3A%2F%2Fapi.codetime.dev%2Fshield%3Fid%3D26388%26project%3D%26in=0)](https://codetime.dev)
 
 ## Password
 
@@ -42,15 +63,12 @@ You can listen to the Kermit the Frog sound here: [kermit.mp3](files/kermit.mp3)
 
 [Listen on External Host](https://www.example-audio-host.com/kermit-audio)
 
+### Github Commits
 
-![GitHub last commit](https://img.shields.io/github/last-commit/davidtkeane/kermit?style=flat-square)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/w/davidtkeane/kermit?authorFilter=davidtkeane)
-![GitHub issues](https://img.shields.io/github/issues-raw/davidtkeane/kermit?style=flat-square)
-![GitHub commit status](https://img.shields.io/github/checks-status/davidtkeane/kermit/fff3b211e20881582eeea4e035dcdd452548ed7a)
+![GitHub last commit](https://img.shields.io/github/last-commit/davidtkeane/Sleep-CLI?style=flat-square)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/w/davidtkeane/Sleep-CLI?authorFilter=davidtkeane)
+![GitHub issues](https://img.shields.io/github/issues-raw/davidtkeane/Sleep-CLI?style=flat-square)
 ![GitHub Sponsors](https://img.shields.io/github/sponsors/davidtkeane)
-![Python](https://img.shields.io/badge/Python-3.7%2B-blue)  
-![License](https://img.shields.io/badge/License-MIT-green)  ![Gmail CLI](https://img.shields.io/badge/Gmail-CLI-red?style=flat&logo=gmail&logoColor=white&labelColor=gray) ![Gmail Python CLI](https://img.shields.io/badge/Gmail-Python%20CLI-blue?style=flat&logo=gmail&logoColor=white&labelColor=red)
-
 
 ## Features
 
@@ -60,7 +78,7 @@ You can listen to the Kermit the Frog sound here: [kermit.mp3](files/kermit.mp3)
 
 *   **Secret Exit Combination:** Provides a hidden way to exit the application by pressing a specific key combination: 
 
-**Control + Command + Shift** (on macOS).
+**Control + Command + Left Shift** (on macOS).
 
 *   **Interactive Message:** Displays a "What's the Secret?" message for 3 seconds when any key (other than the secret exit combination) is pressed.
 
@@ -76,6 +94,13 @@ You can listen to the Kermit the Frog sound here: [kermit.mp3](files/kermit.mp3)
     *   **Pillow (PIL):** Used for image processing and handling the animated GIF.
     *   **tkinter:** Used for creating the fullscreen window and handling user input.
 
+### My Other Cool Scripts.
+
+[![Gmail Multi-Account CLI](https://img.shields.io/badge/Gmail-Multi--Account%20CLI-green?logo=gmail&logoColor=white&labelColor=EA4335)](https://github.com/davidtkeane/gmail-multi-cli)
+[![Sleep CLI](https://img.shields.io/badge/Sleep-CLI-blue)](https://github.com/davidtkeane/Sleep-CLI)
+[![PhoneBook CLI](https://img.shields.io/badge/PhoneBook-CLI-blue)](https://github.com/davidtkeane/PhoneBook-CLI)
+[![Kermit ScreenSaver](https://img.shields.io/badge/kermit-screensaver-blue)](https://github.com/davidtkeane/kermit)
+
 ## Installation
 
 1.  **Clone the Repository:**
@@ -89,6 +114,12 @@ You can listen to the Kermit the Frog sound here: [kermit.mp3](files/kermit.mp3)
     ```bash
     pip install pygame Pillow
     ```
+
+### Socials
+
+[![Github](https://img.shields.io/badge/github-%2324292e.svg?&style=for-the-badge&logo=github&logoColor=white)](https://github.com/davidtkeane)
+[![X](https://img.shields.io/badge/twitter-%2300acee.svg?&style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/davidtkeane)
+[![Linkedin](https://img.shields.io/badge/linkedin-%231E77B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/)
 
 ## Usage
 
@@ -141,3 +172,8 @@ Feel free to fork this repository and submit pull requests with enhancements or 
 ## License
 
 This project is licensed under the [MIT License](LICENSE) - see the LICENSE file for details.
+
+
+[![Buy me a coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=&slug=davidtkeane&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff)](https://buymeacoffee.com/davidtkeane)
+
+</p>
