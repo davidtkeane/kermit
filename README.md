@@ -49,16 +49,16 @@ python kermit.py
 *   The application will launch in fullscreen mode, displaying the animated GIF and playing the sound.
 *   Press any key to see the "What's the Secret?" message for 3 seconds.
 *   To exit:
-    *   **macOS:** **(Control) ⌃ + (Command) ⌘ + Left Shift**
+    *   **macOS:** **(Control) ⌃ + (Option) ⌥ + Left Shift**
     *   **Linux:** **Ctrl + Alt + Left Shift**
-    *   **MacBook keyboard in Linux VM:** **Control + Option + Left Shift**
+    *   **MacBook keyboard:** **Control + Option + Left Shift** (same keys on both platforms!)
 
 ### Pause/Resume
 
 *   To pause/unpause:
-    *   **macOS:** **(Control) ⌃ + (Command) ⌘ + P**
+    *   **macOS:** **(Control) ⌃ + (Option) ⌥ + P**
     *   **Linux:** **Ctrl + Alt + P**
-    *   **MacBook keyboard in Linux VM:** **Control + Option + P**
+    *   **MacBook keyboard:** **Control + Option + P** (same keys on both platforms!)
 
 ### Volume
 

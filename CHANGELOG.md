@@ -17,8 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Cross-platform support for macOS and Linux (Kali/Debian/Ubuntu)
 - Automatic platform detection using `platform.system()`
-- Platform-specific key bindings:
-  - macOS: Control + Command + Left Shift (exit), Control + Command + P (pause)
+- Unified key bindings across platforms (same physical keys on MacBook):
+  - macOS: Control + Option + Left Shift (exit), Control + Option + P (pause)
   - Linux: Ctrl + Alt + Left Shift (exit), Ctrl + Alt + P (pause)
 - Command-line help flag (`--help` or `-h`) with platform-specific instructions
 - Version constant (VERSION = "3.0.0")
@@ -29,7 +29,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Shebang updated from macOS-specific path to portable `#!/usr/bin/env python3`
 - Key binding logic now uses platform-agnostic keysym sets
 - requirements.txt enhanced with system package installation notes for Linux
-- Uses Alt key instead of Super/Meta on Linux for better VM compatibility
+- macOS now uses Option key instead of Command key (matches Linux Alt key behavior)
+- Same physical keys work on both macOS and Linux when using MacBook keyboard
 
 ### Fixed
 - Key combinations now work reliably in Linux VMs (avoids Super key interception)
@@ -78,9 +79,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Platform Support
 
 ### Current (v3.0.0)
-- macOS: Full support (Control + Command + Shift)
+- macOS: Full support (Control + Option + Shift)
 - Linux (Kali/Debian/Ubuntu): Full support (Ctrl + Alt + Shift)
 - Windows: Not tested (should work with Ctrl + Alt + Shift)
+- MacBook keyboard: Same physical keys work on both platforms!
 
 ### Planned (v4.0.0)
 - Windows: Full tested support

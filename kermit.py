@@ -24,20 +24,20 @@ CURRENT_OS = platform.system()
 if CURRENT_OS == "Darwin":  # macOS
     SECRET_KEY_COMBINATION = {
         "<Control_L>",  # Left Control (Control) ⌃
-        "<Meta_L>",     # Left Command (Command) ⌘
+        "<Alt_L>",      # Left Option (Option) ⌥
         "<Shift_L>",    # Left Shift
     }
-    SECRET_KEYS_DISPLAY = "Control + Command + Left Shift"
+    SECRET_KEYS_DISPLAY = "Control + Option + Left Shift"
 
     PAUSE_KEY_COMBINATION = {
         "<Control_L>",  # Left Control (Control) ⌃
-        "<Meta_L>",     # Left Command (Command) ⌘
+        "<Alt_L>",      # Left Option (Option) ⌥
         "p",            # Key 'p'
     }
-    PAUSE_KEYS_DISPLAY = "Control + Command + P"
+    PAUSE_KEYS_DISPLAY = "Control + Option + P"
 
-    SECRET_KEYSYMS = {"Control_L", "Meta_L", "Shift_L"}
-    PAUSE_KEYSYMS = {"Control_L", "Meta_L", "p"}
+    SECRET_KEYSYMS = {"Control_L", "Alt_L", "Shift_L"}
+    PAUSE_KEYSYMS = {"Control_L", "Alt_L", "p"}
 
 else:  # Linux (Kali, Ubuntu, etc.) and others
     SECRET_KEY_COMBINATION = {
