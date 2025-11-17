@@ -6,7 +6,7 @@ This project brings the iconic Kermit the Frog to your screen with a fullscreen 
 [![Kermit ScreenSaver](https://img.shields.io/badge/kermit-screensaver-blue)](https://github.com/davidtkeane/kermit)
 
 ![Python](https://img.shields.io/badge/Python-3.7%2B-blue) ![License](https://img.shields.io/badge/License-MIT-green)
-![Version](https://img.shields.io/badge/Version-3.0.0-orange)
+![Version](https://img.shields.io/badge/Version-3.1.0-orange)
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/davidtkeane/kermit?style=flat-square)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/davidtkeane/kermit?authorFilter=davidtkeane)
@@ -28,14 +28,31 @@ Here's a glimpse of what you'll see (make sure you're viewing this on GitHub to 
 ## Quick Setup and Running and Setup of the Script - See more info below:
 
 A: Firstly, Install the dependencies in the requirements.txt file.
-    
+
 ```bash
 pip install -r requirements.txt
 ```
-B: Now all you do is fun the Kermit script!
+B: Now all you do is run the Kermit script!
 
 ```bash
 python kermit.py
+```
+
+### Command-Line Options (v3.1.0+)
+
+```bash
+python kermit.py --help                    # Show all options
+python kermit.py --gif custom.gif          # Use custom GIF
+python kermit.py --audio music.mp3         # Use custom audio
+python kermit.py --volume 0.5              # Set initial volume (50%)
+python kermit.py --no-sound                # Silent mode (no audio)
+python kermit.py --version                 # Show version
+```
+
+**Combine options:**
+```bash
+python kermit.py --gif cat.gif --audio meow.mp3 --volume 0.3
+python kermit.py --gif custom.gif --no-sound
 ```
 
 ### Time @ Work!
@@ -101,6 +118,14 @@ You can listen to the Kermit the Frog sound here: [kermit.mp3](files/kermit.mp3)
 *   **Hidden Mouse Cursor:** Hides the mouse cursor while the application is running in fullscreen mode.
 
 *   **Command-Line Help:** Run with `--help` to see platform-specific controls and requirements.
+
+*   **Custom Media Files:** Use `--gif` and `--audio` flags to specify custom GIF and audio files.
+
+*   **Initial Volume Control:** Set starting volume with `--volume 0.0-1.0` flag.
+
+*   **Silent Mode:** Run without audio using `--no-sound` flag.
+
+*   **Graceful Error Handling:** Clear error messages when files are missing, with helpful suggestions.
 
 ## Requirements
 
