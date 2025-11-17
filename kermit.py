@@ -1,5 +1,6 @@
-#!/Users/ranger/.pyenv/shims/python3
+#!/usr/bin/env python3
 # Created by Ranger
+# Cross-platform support for macOS and Linux
 
 # Import Modules
 import pygame
@@ -7,26 +8,90 @@ import tkinter as tk
 import threading
 import time
 import sys
+import platform
+import argparse
 from PIL import Image, ImageTk, ImageSequence
 
 # Configuration
 SOUND_FILE = "files/kermit.mp3"
 IMAGE_FILE = "files/kermit.gif"
+VERSION = "3.0.0"
 
-SECRET_KEY_COMBINATION = {
-    "<Control_L>",  # Left Control (Control) ⌃ (macOS)
-    "<Meta_L>",     # Left Command (Command) ⌘ (macOS) 
-    "<Shift_L>",    # Left Shift
-}
+# Detect operating system
+CURRENT_OS = platform.system()
 
-PAUSE_KEY_COMBINATION = {
-    "<Control_L>",  # Left Control (Control) ⌃ (macOS)
-    "<Meta_L>",     # Left Command (Command) ⌘ (macOS) 
-    # "<Shift_L>",    # Left Shift
-    "p",            # Key 'p'
-}
+# Platform-specific key bindings
+if CURRENT_OS == "Darwin":  # macOS
+    SECRET_KEY_COMBINATION = {
+        "<Control_L>",  # Left Control (Control) ⌃
+        "<Meta_L>",     # Left Command (Command) ⌘
+        "<Shift_L>",    # Left Shift
+    }
+    SECRET_KEYS_DISPLAY = "Control + Command + Left Shift"
+
+    PAUSE_KEY_COMBINATION = {
+        "<Control_L>",  # Left Control (Control) ⌃
+        "<Meta_L>",     # Left Command (Command) ⌘
+        "p",            # Key 'p'
+    }
+    PAUSE_KEYS_DISPLAY = "Control + Command + P"
+
+    SECRET_KEYSYMS = {"Control_L", "Meta_L", "Shift_L"}
+    PAUSE_KEYSYMS = {"Control_L", "Meta_L", "p"}
+
+else:  # Linux (Kali, Ubuntu, etc.) and others
+    SECRET_KEY_COMBINATION = {
+        "<Control_L>",  # Left Control
+        "<Alt_L>",      # Left Alt (more reliable in VMs than Super)
+        "<Shift_L>",    # Left Shift
+    }
+    SECRET_KEYS_DISPLAY = "Ctrl + Alt + Left Shift"
+
+    PAUSE_KEY_COMBINATION = {
+        "<Control_L>",  # Left Control
+        "<Alt_L>",      # Left Alt
+        "p",            # Key 'p'
+    }
+    PAUSE_KEYS_DISPLAY = "Ctrl + Alt + P"
+
+    SECRET_KEYSYMS = {"Control_L", "Alt_L", "Shift_L"}
+    PAUSE_KEYSYMS = {"Control_L", "Alt_L", "p"}
 
 MESSAGE_DURATION = 3  # Seconds for the message to display
+
+
+def show_help():
+    """Display help information with platform-specific controls."""
+    help_text = f"""
+Kermit Screen Lock Experience v{VERSION}
+{'=' * 40}
+
+Platform: {CURRENT_OS}
+
+CONTROLS:
+  Exit (Secret):  {SECRET_KEYS_DISPLAY}
+  Pause/Resume:   {PAUSE_KEYS_DISPLAY}
+  Volume Up:      Up Arrow
+  Volume Down:    Down Arrow
+  Show Message:   Any other key
+
+USAGE:
+  python kermit.py          Launch the application
+  python kermit.py --help   Show this help message
+  python kermit.py -h       Show this help message
+
+REQUIREMENTS:
+  - Python 3.7+
+  - pygame
+  - Pillow (PIL)
+  - tkinter (python3-tk on Linux)
+
+FILES:
+  - files/kermit.mp3   Audio file
+  - files/kermit.gif   Animated GIF
+"""
+    print(help_text)
+    sys.exit(0)
 
 class KermitApp:
     def __init__(self):
@@ -139,17 +204,17 @@ class KermitApp:
 
     def on_any_key_press(self, event):
         # Show the message if any key is pressed (except the secret combination)
-        if not all(key in self.pressed_keys for key in {"Control_L", "Meta_L", "p"}):
+        if not all(key in self.pressed_keys for key in PAUSE_KEYSYMS):
             self.show_message = True
             self.message_timer = time.time()
             self.update_message()
 
     def check_secret_combination(self):
-        if all(key in self.pressed_keys for key in {"Control_L", "Meta_L", "Shift_L"}):
+        if all(key in self.pressed_keys for key in SECRET_KEYSYMS):
             self.stop()
 
     def check_pause_combination(self):
-        if all(key in self.pressed_keys for key in {"Control_L", "Meta_L", "p"}):
+        if all(key in self.pressed_keys for key in PAUSE_KEYSYMS):
             self.toggle_pause()
 
     def toggle_pause(self):
@@ -219,5 +284,15 @@ class KermitApp:
         self.root.destroy()
 
 if __name__ == "__main__":
+    # Parse command line arguments
+    if len(sys.argv) > 1 and sys.argv[1] in ["-h", "--help"]:
+        show_help()
+
+    print(f"Kermit Screen Lock v{VERSION}")
+    print(f"Platform: {CURRENT_OS}")
+    print(f"Exit: {SECRET_KEYS_DISPLAY}")
+    print(f"Pause: {PAUSE_KEYS_DISPLAY}")
+    print("Starting...")
+
     app = KermitApp()
     app.start()

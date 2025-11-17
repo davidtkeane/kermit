@@ -5,8 +5,8 @@ This project brings the iconic Kermit the Frog to your screen with a fullscreen 
 
 [![Kermit ScreenSaver](https://img.shields.io/badge/kermit-screensaver-blue)](https://github.com/davidtkeane/kermit)
 
-![Python](https://img.shields.io/badge/Python-3.7%2B-blue) ![License](https://img.shields.io/badge/License-MIT-green) 
-![Version](https://img.shields.io/badge/Version-2.0-orange)
+![Python](https://img.shields.io/badge/Python-3.7%2B-blue) ![License](https://img.shields.io/badge/License-MIT-green)
+![Version](https://img.shields.io/badge/Version-3.0.0-orange)
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/davidtkeane/kermit?style=flat-square)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/davidtkeane/kermit?authorFilter=davidtkeane)
@@ -42,20 +42,32 @@ python kermit.py
 
 [![CodeTime Badge](https://img.shields.io/endpoint?style=social&color=222&url=https%3A%2F%2Fapi.codetime.dev%2Fshield%3Fid%3D26388%26project%3D%26in=0)](https://codetime.dev)
 
-## Password
+## Controls
+
+### Exit (Secret Password)
 
 *   The application will launch in fullscreen mode, displaying the animated GIF and playing the sound.
-*   Press any key (except Control, Command, and Shift together) to see the "What's the Secret?" message for 3 seconds.
-*   To exit, press **(Command) ⌘ + (Control) ⌃ + Left Shift** simultaneously. I have no idea how to stop if you forget the keys!
+*   Press any key to see the "What's the Secret?" message for 3 seconds.
+*   To exit:
+    *   **macOS:** **(Control) ⌃ + (Command) ⌘ + Left Shift**
+    *   **Linux:** **Ctrl + Alt + Left Shift**
+    *   **MacBook keyboard in Linux VM:** **Control + Option + Left Shift**
 
-## Pause
+### Pause/Resume
 
-*   The application will launch in fullscreen mode, displaying the animated GIF and playing the sound.
-*   To pause/unpause, press **(Command) ⌘ + (Control) ⌃ + p** simultaneously. 
+*   To pause/unpause:
+    *   **macOS:** **(Control) ⌃ + (Command) ⌘ + P**
+    *   **Linux:** **Ctrl + Alt + P**
+    *   **MacBook keyboard in Linux VM:** **Control + Option + P**
 
-## Volume 
+### Volume
 
-*   You can use the up and down arrows to increase and decrease the volume.
+*   **Up Arrow** - Increase volume
+*   **Down Arrow** - Decrease volume
+
+### Help
+
+*   Run `python kermit.py --help` to see platform-specific controls
 
 ## Audio
 
@@ -72,27 +84,38 @@ You can listen to the Kermit the Frog sound here: [kermit.mp3](files/kermit.mp3)
 
 ## Features
 
+*   **Cross-Platform Support:** Works on macOS and Linux (Kali/Debian/Ubuntu) with automatic platform detection and appropriate key bindings.
+
 *   **Fullscreen Animated GIF Display:** Showcases a fullscreen, looping, animated GIF of Kermit the Frog (as you can see above!). The image is automatically scaled to fit your screen while maintaining its original aspect ratio.
 
 *   **Looping MP3 Audio:** Plays a Kermit the Frog MP3 sound file in a continuous loop.
 
-*   **Secret Exit Combination:** Provides a hidden way to exit the application by pressing a specific key combination: 
+*   **Secret Exit Combination:** Provides a hidden way to exit the application by pressing a platform-specific key combination (see [Controls](#controls) section).
 
-**Control + Command + Left Shift** (on macOS).
+*   **Pause/Resume:** Pause and resume both audio and animation with a key combination.
+
+*   **Volume Control:** Adjust volume with Up/Down arrow keys.
 
 *   **Interactive Message:** Displays a "What's the Secret?" message for 3 seconds when any key (other than the secret exit combination) is pressed.
 
 *   **Hidden Mouse Cursor:** Hides the mouse cursor while the application is running in fullscreen mode.
 
+*   **Command-Line Help:** Run with `--help` to see platform-specific controls and requirements.
+
 ## Requirements
 
-*   **Python 3:** This project is written in Python 3. Make sure you have Python 3 installed on your system. You can check your Python version by running `python --version` or `python3 --version` in your terminal.
+*   **Python 3.7+:** This project is written in Python 3. Make sure you have Python 3.7 or higher installed on your system. You can check your Python version by running `python --version` or `python3 --version` in your terminal.
 
-*   **Libraries:**
+*   **Python Libraries:**
 
     *   **pygame:** Used for audio playback.
     *   **Pillow (PIL):** Used for image processing and handling the animated GIF.
     *   **tkinter:** Used for creating the fullscreen window and handling user input.
+
+*   **System Packages (Linux):**
+
+    *   **python3-tk:** Required for tkinter GUI (`sudo apt install python3-tk`)
+    *   **Optional:** mpg123, libsdl2-mixer for better audio support
 
 ### My Other Cool Scripts.
 
@@ -110,7 +133,26 @@ You can listen to the Kermit the Frog sound here: [kermit.mp3](files/kermit.mp3)
     ```
     (Replace `<repository_url>` with the actual URL of your GitHub repository and `<repository_directory>` with the name of the directory.)
 
-2.  **Install Dependencies:**
+2.  **Install System Dependencies:**
+
+    **macOS:**
+    ```bash
+    # tkinter is included with Python from python.org or Homebrew
+    # If missing:
+    brew install python-tk@3.x
+    ```
+
+    **Linux (Kali/Debian/Ubuntu):**
+    ```bash
+    sudo apt update
+    sudo apt install python3-tk
+    ```
+
+3.  **Install Python Dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+    Or manually:
     ```bash
     pip install pygame Pillow
     ```
@@ -143,8 +185,9 @@ You can listen to the Kermit the Frog sound here: [kermit.mp3](files/kermit.mp3)
 
 3.  **Interaction:**
     *   The application will launch in fullscreen mode, displaying the animated GIF and playing the sound.
-    *   Press any key (except Control, Command, and Shift together) to see the "What's the Secret?" message for 3 seconds.
-    *   To exit, press **Control + Command + Shift** simultaneously.
+    *   Press any key to see the "What's the Secret?" message for 3 seconds.
+    *   To exit: **See [Controls](#controls) section above for platform-specific keys**
+    *   The script auto-detects your OS and shows the correct key bindings on startup.
 
 ## Code Structure
 
@@ -163,7 +206,10 @@ The `kermit.py` script is organized into the `KermitApp` class, which handles th
 ## Troubleshooting
 
 *   **MP3 Playback Issues:** If you encounter problems with MP3 playback, you might need to install the `mpg123` library, which can sometimes improve Pygame's MP3 support. Installation instructions for `mpg123` vary by operating system (e.g., `brew install mpg123` on macOS with Homebrew, `sudo apt-get install mpg123` on Ubuntu/Debian).
-*   **File Not Found:** Double-check that `kermit.mp3` and `kermit.gif` are in the same directory as the `kermit.py` script.
+*   **File Not Found:** Double-check that `kermit.mp3` and `kermit.gif` are in the `files/` subdirectory relative to the `kermit.py` script.
+*   **tkinter Not Found (Linux):** Install with `sudo apt install python3-tk`
+*   **Key Combinations Not Working (Linux VM):** If running Linux in a VM on macOS, use the **Option** key (⌥) on your MacBook keyboard - it maps to Alt in Linux.
+*   **Platform Not Detected:** Run `python kermit.py --help` to see which platform was detected and the correct key bindings.
 
 ## Contributing
 
