@@ -1,2 +1,23 @@
+# Kermit Screen Lock - Python Dependencies
+# Install with: pip install -r requirements.txt
+
 pygame==2.6.1
 Pillow==10.3.0
+
+# ============================================
+# SYSTEM PACKAGE REQUIREMENTS (not pip)
+# ============================================
+#
+# macOS:
+#   - tkinter is included with Python from python.org or Homebrew
+#   - If missing: brew install python-tk@3.x
+#
+# Linux (Kali/Debian/Ubuntu):
+#   - sudo apt update
+#   - sudo apt install python3-tk
+#   - sudo apt install python3-pil python3-pil.imagetk  # Alternative to pip Pillow
+#
+# Optional for better MP3 support:
+#   - macOS: brew install mpg123
+#   - Linux: sudo apt install mpg123 libsdl2-mixer-2.0-0
+#

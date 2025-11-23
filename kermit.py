@@ -1,5 +1,6 @@
-#!/Users/ranger/.pyenv/shims/python3
+#!/usr/bin/env python3
 # Created by Ranger
+# Cross-platform support for macOS and Linux
 
 # Import Modules
 import pygame
@@ -7,29 +8,164 @@ import tkinter as tk
 import threading
 import time
 import sys
+import platform
+import argparse
 from PIL import Image, ImageTk, ImageSequence
 
-# Configuration
-SOUND_FILE = "files/kermit.mp3"
-IMAGE_FILE = "files/kermit.gif"
+# Default Configuration
+DEFAULT_SOUND_FILE = "files/kermit.mp3"
+DEFAULT_IMAGE_FILE = "files/kermit.gif"
+DEFAULT_VOLUME = 1.0
+VERSION = "3.1.0"
 
-SECRET_KEY_COMBINATION = {
-    "<Control_L>",  # Left Control (Control) ⌃ (macOS)
-    "<Meta_L>",     # Left Command (Command) ⌘ (macOS) 
-    "<Shift_L>",    # Left Shift
-}
+# Detect operating system
+CURRENT_OS = platform.system()
 
-PAUSE_KEY_COMBINATION = {
-    "<Control_L>",  # Left Control (Control) ⌃ (macOS)
-    "<Meta_L>",     # Left Command (Command) ⌘ (macOS) 
-    # "<Shift_L>",    # Left Shift
-    "p",            # Key 'p'
-}
+# Platform-specific key bindings
+if CURRENT_OS == "Darwin":  # macOS
+    SECRET_KEY_COMBINATION = {
+        "<Control_L>",  # Left Control (Control) ⌃
+        "<Alt_L>",      # Left Option (Option) ⌥
+        "<Shift_L>",    # Left Shift
+    }
+    SECRET_KEYS_DISPLAY = "Control + Option + Left Shift"
+
+    PAUSE_KEY_COMBINATION = {
+        "<Control_L>",  # Left Control (Control) ⌃
+        "<Alt_L>",      # Left Option (Option) ⌥
+        "p",            # Key 'p'
+    }
+    PAUSE_KEYS_DISPLAY = "Control + Option + P"
+
+    SECRET_KEYSYMS = {"Control_L", "Alt_L", "Shift_L"}
+    PAUSE_KEYSYMS = {"Control_L", "Alt_L", "p"}
+
+else:  # Linux (Kali, Ubuntu, etc.) and others
+    SECRET_KEY_COMBINATION = {
+        "<Control_L>",  # Left Control
+        "<Alt_L>",      # Left Alt (more reliable in VMs than Super)
+        "<Shift_L>",    # Left Shift
+    }
+    SECRET_KEYS_DISPLAY = "Ctrl + Alt + Left Shift"
+
+    PAUSE_KEY_COMBINATION = {
+        "<Control_L>",  # Left Control
+        "<Alt_L>",      # Left Alt
+        "p",            # Key 'p'
+    }
+    PAUSE_KEYS_DISPLAY = "Ctrl + Alt + P"
+
+    SECRET_KEYSYMS = {"Control_L", "Alt_L", "Shift_L"}
+    PAUSE_KEYSYMS = {"Control_L", "Alt_L", "p"}
 
 MESSAGE_DURATION = 3  # Seconds for the message to display
 
+
+def parse_arguments():
+    """Parse command-line arguments."""
+    parser = argparse.ArgumentParser(
+        description=f"Kermit Screen Lock Experience v{VERSION}",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=f"""
+CONTROLS:
+  Exit (Secret):  {SECRET_KEYS_DISPLAY}
+  Pause/Resume:   {PAUSE_KEYS_DISPLAY}
+  Volume Up:      Up Arrow
+  Volume Down:    Down Arrow
+  Show Message:   Any other key
+
+EXAMPLES:
+  python kermit.py                           # Default settings
+  python kermit.py --gif custom.gif          # Custom GIF
+  python kermit.py --audio music.mp3         # Custom audio
+  python kermit.py --volume 0.5              # 50% volume
+  python kermit.py --no-sound                # Silent mode
+  python kermit.py --gif cat.gif --no-sound  # Custom GIF, no sound
+
+Platform: {CURRENT_OS}
+"""
+    )
+
+    parser.add_argument(
+        "--gif",
+        type=str,
+        default=DEFAULT_IMAGE_FILE,
+        help=f"Path to GIF file (default: {DEFAULT_IMAGE_FILE})"
+    )
+
+    parser.add_argument(
+        "--audio",
+        type=str,
+        default=DEFAULT_SOUND_FILE,
+        help=f"Path to audio file (default: {DEFAULT_SOUND_FILE})"
+    )
+
+    parser.add_argument(
+        "--volume",
+        type=float,
+        default=DEFAULT_VOLUME,
+        help=f"Initial volume level 0.0-1.0 (default: {DEFAULT_VOLUME})"
+    )
+
+    parser.add_argument(
+        "--no-sound",
+        action="store_true",
+        help="Run without audio (silent mode)"
+    )
+
+    parser.add_argument(
+        "--version",
+        action="version",
+        version=f"Kermit Screen Lock v{VERSION}"
+    )
+
+    args = parser.parse_args()
+
+    # Validate volume range
+    if args.volume < 0.0 or args.volume > 1.0:
+        parser.error("Volume must be between 0.0 and 1.0")
+
+    return args
+
+
+def validate_files(gif_path, audio_path, no_sound):
+    """Check if required files exist and provide helpful error messages."""
+    import os
+
+    errors = []
+
+    # Check GIF file
+    if not os.path.isfile(gif_path):
+        errors.append(f"GIF file not found: {gif_path}")
+        if gif_path == DEFAULT_IMAGE_FILE:
+            errors.append("  -> Make sure 'files/kermit.gif' exists in the current directory")
+        else:
+            errors.append(f"  -> Check that the file path is correct")
+
+    # Check audio file (only if sound is enabled)
+    if not no_sound and not os.path.isfile(audio_path):
+        errors.append(f"Audio file not found: {audio_path}")
+        if audio_path == DEFAULT_SOUND_FILE:
+            errors.append("  -> Make sure 'files/kermit.mp3' exists in the current directory")
+        else:
+            errors.append(f"  -> Check that the file path is correct")
+        errors.append("  -> Or use --no-sound to run without audio")
+
+    if errors:
+        print("ERROR: Missing required files\n")
+        for error in errors:
+            print(error)
+        print(f"\nCurrent directory: {os.getcwd()}")
+        sys.exit(1)
+
 class KermitApp:
-    def __init__(self):
+    def __init__(self, gif_path=DEFAULT_IMAGE_FILE, audio_path=DEFAULT_SOUND_FILE,
+                 initial_volume=DEFAULT_VOLUME, no_sound=False):
+        self.gif_path = gif_path
+        self.audio_path = audio_path
+        self.initial_volume = initial_volume
+        self.no_sound = no_sound
+
         self.root = tk.Tk()
         self.root.attributes("-fullscreen", True)
         self.root.configure(background='black')
@@ -38,7 +174,7 @@ class KermitApp:
 
         # --- Load and Resize the Image ---
         try:
-            self.original_image = Image.open(IMAGE_FILE)
+            self.original_image = Image.open(self.gif_path)
             screen_width = self.root.winfo_screenwidth()
             screen_height = self.root.winfo_screenheight()
             img_width, img_height = self.original_image.size
@@ -64,18 +200,24 @@ class KermitApp:
         self.image_label.pack()
 
         # --- Initialize Pygame for Sound ---
-        pygame.mixer.init()
-        try:
-            self.sound = pygame.mixer.Sound(SOUND_FILE)
-        except pygame.error as e:
-            print(f"Error loading MP3 with pygame: {e}")
-            print("Attempting to play MP3 using pygame.mixer.music...")
+        self.sound = None
+        if not self.no_sound:
+            pygame.mixer.init()
             try:
-                pygame.mixer.music.load(SOUND_FILE)
-                self.sound = None
+                self.sound = pygame.mixer.Sound(self.audio_path)
+                self.sound.set_volume(self.initial_volume)
             except pygame.error as e:
-                print(f"Error loading MP3 with pygame.mixer.music: {e}")
-                sys.exit(1)
+                print(f"Error loading audio with pygame.mixer.Sound: {e}")
+                print("Attempting to load using pygame.mixer.music...")
+                try:
+                    pygame.mixer.music.load(self.audio_path)
+                    pygame.mixer.music.set_volume(self.initial_volume)
+                    self.sound = None
+                except pygame.error as e:
+                    print(f"Error loading audio with pygame.mixer.music: {e}")
+                    sys.exit(1)
+        else:
+            print("Sound disabled (--no-sound)")
 
         # --- Message Label ---
         self.message_label = tk.Label(self.root, text="", font=("Arial", 48), fg="white", bg="black")
@@ -105,6 +247,9 @@ class KermitApp:
         self.root.bind("<Down>", self.decrease_volume)
     
     def increase_volume(self, event):
+        if self.no_sound:
+            return  # No volume control in silent mode
+
         if self.sound:
             current_volume = self.sound.get_volume()
             new_volume = min(current_volume + 0.1, 1.0)  # Max volume is 1.0
@@ -115,6 +260,9 @@ class KermitApp:
             pygame.mixer.music.set_volume(new_volume)
 
     def decrease_volume(self, event):
+        if self.no_sound:
+            return  # No volume control in silent mode
+
         if self.sound:
             current_volume = self.sound.get_volume()
             new_volume = max(current_volume - 0.1, 0.0)  # Min volume is 0.0
@@ -139,33 +287,37 @@ class KermitApp:
 
     def on_any_key_press(self, event):
         # Show the message if any key is pressed (except the secret combination)
-        if not all(key in self.pressed_keys for key in {"Control_L", "Meta_L", "p"}):
+        if not all(key in self.pressed_keys for key in PAUSE_KEYSYMS):
             self.show_message = True
             self.message_timer = time.time()
             self.update_message()
 
     def check_secret_combination(self):
-        if all(key in self.pressed_keys for key in {"Control_L", "Meta_L", "Shift_L"}):
+        if all(key in self.pressed_keys for key in SECRET_KEYSYMS):
             self.stop()
 
     def check_pause_combination(self):
-        if all(key in self.pressed_keys for key in {"Control_L", "Meta_L", "p"}):
+        if all(key in self.pressed_keys for key in PAUSE_KEYSYMS):
             self.toggle_pause()
 
     def toggle_pause(self):
         self.paused = not self.paused
-        if self.paused:
-            if self.sound:
-                pygame.mixer.pause()
+        if not self.no_sound:
+            if self.paused:
+                if self.sound:
+                    pygame.mixer.pause()
+                else:
+                    pygame.mixer.music.pause()
             else:
-                pygame.mixer.music.pause()
-        else:
-            if self.sound:
-                pygame.mixer.unpause()
-            else:
-                pygame.mixer.music.unpause()
+                if self.sound:
+                    pygame.mixer.unpause()
+                else:
+                    pygame.mixer.music.unpause()
 
     def play_sound_loop(self):
+        if self.no_sound:
+            return  # Exit immediately if sound is disabled
+
         while self.running:
             if not self.paused:
                 if self.sound:
@@ -212,12 +364,37 @@ class KermitApp:
 
     def stop(self):
         self.running = False
-        if self.sound:
-            pygame.mixer.stop()
-        else:
-            pygame.mixer.music.stop()
+        if not self.no_sound:
+            if self.sound:
+                pygame.mixer.stop()
+            else:
+                pygame.mixer.music.stop()
         self.root.destroy()
 
 if __name__ == "__main__":
-    app = KermitApp()
+    # Parse command line arguments
+    args = parse_arguments()
+
+    # Validate that required files exist
+    validate_files(args.gif, args.audio, args.no_sound)
+
+    # Display startup information
+    print(f"Kermit Screen Lock v{VERSION}")
+    print(f"Platform: {CURRENT_OS}")
+    print(f"Exit: {SECRET_KEYS_DISPLAY}")
+    print(f"Pause: {PAUSE_KEYS_DISPLAY}")
+    print(f"GIF: {args.gif}")
+    if not args.no_sound:
+        print(f"Audio: {args.audio}")
+        print(f"Volume: {args.volume:.0%}")
+    else:
+        print("Audio: DISABLED (--no-sound)")
+    print("Starting...")
+
+    app = KermitApp(
+        gif_path=args.gif,
+        audio_path=args.audio,
+        initial_volume=args.volume,
+        no_sound=args.no_sound
+    )
     app.start()
