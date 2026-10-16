@@ -269,6 +269,11 @@ class KermitApp:
         self.root.bind("<KeyRelease>", self.on_key_release)
         self.root.bind("<FocusOut>", lambda event: self.keys.clear())
 
+        # --- Friend-proofing: only the secret combination (or Ctrl+C in the terminal) exits ---
+        self.root.protocol("WM_DELETE_WINDOW", self.show_message)  # Close button / Alt+F4
+        if CURRENT_OS == "Darwin":
+            self.root.createcommand("::tk::mac::Quit", self.show_message)  # Cmd+Q / Quit menu
+
     def change_volume(self, step):
         if self.no_sound:
             return  # No volume control in silent mode
