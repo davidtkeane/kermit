@@ -16,6 +16,8 @@ Lockdown mode and password/PIN exit have been dropped - Kermit is a fun screensa
 
 ## [3.1.1] - 2026-10-16
 
+Merged in [PR #1](https://github.com/davidtkeane/kermit/pull/1).
+
 ### Changed
 - **macOS secret exit is now Control + Command** (was Control + Option + Left Shift). Linux is unchanged: Ctrl + Alt + Left Shift
 
@@ -35,6 +37,11 @@ Lockdown mode and password/PIN exit have been dropped - Kermit is a fun screensa
 - GIF frames are resized with high-quality LANCZOS resampling
 - Ctrl+C in the terminal now exits cleanly
 - pygame's startup banner and `pkg_resources` warning are hidden
+
+### Tested
+- Real-keyboard test on macOS (M3 Pro): Control + Command exits, Control + Option + P pauses, tapping the exit keys one at a time does not exit
+- Key-combination logic tested with simulated key presses (exit, pause, auto-repeat on macOS and Linux, focus loss)
+- Python 3.11 and 3.13, Tk 8.6.14
 
 ### Technical
 - New `KeyTracker` class holds the key-combination logic, separate from Tk so it can be unit tested
@@ -129,6 +136,7 @@ Lockdown mode and password/PIN exit have been dropped - Kermit is a fun screensa
 
 | Version | Date | Platform | Key Changes |
 |---------|------|----------|-------------|
+| 3.1.1 | 2026-10-16 | macOS, Linux | Secret-exit bug fix, macOS exit is Control + Command, sound/layout fixes |
 | 3.1.0 | 2025-11-17 | macOS, Linux | CLI arguments, custom media, silent mode |
 | 3.0.0 | 2025-11-17 | macOS, Linux | Cross-platform support, platform detection |
 | 2.0.0 | 2024 | macOS | Volume, pause, improved UX |
@@ -136,13 +144,13 @@ Lockdown mode and password/PIN exit have been dropped - Kermit is a fun screensa
 
 ## Platform Support
 
-### Current (v3.0.0)
-- macOS: Full support (Control + Option + Shift)
-- Linux (Kali/Debian/Ubuntu): Full support (Ctrl + Alt + Shift)
-- Windows: Not tested (should work with Ctrl + Alt + Shift)
-- MacBook keyboard: Same physical keys work on both platforms!
+### Current (v3.1.1)
+- macOS: Full support - exit with Control + Command, pause with Control + Option + P
+- Linux (Kali/Debian/Ubuntu): Full support - exit with Ctrl + Alt + Left Shift, pause with Ctrl + Alt + P
+- Windows: Not tested (should work with Ctrl + Alt + Left Shift)
+- Linux VM on a MacBook: use the Option key for Alt
 
 ### Planned (v4.0.0)
 - Windows: Full tested support
 - Custom key binding configuration
-- Command-line media file selection
+- Multi-monitor blackout
