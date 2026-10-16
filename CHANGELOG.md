@@ -12,12 +12,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The window close button and Alt+F4 (Linux) are blocked the same way
 - Ctrl+C in the terminal still works as an emergency exit
 
+### Changed
+- `TODO.md` is no longer tracked in the repo - the detailed roadmap is kept locally, and the Planned list below is the public summary
+
 ### Planned
 - v3.2.0 - Friend-proofing & polish: on-screen volume and pause indicators, `--timeout`, custom message, random GIF from a folder
 - v3.3.0 - Packaging & code quality: `>=` dependency pins, `pyproject.toml`, unit tests, GitHub Actions
 - v4.0.0 - Windows support, multi-monitor, config file
 
-Lockdown mode and password/PIN exit have been dropped - Kermit is a fun screensaver that stops a friend messing with your computer, not a security lock. See `TODO.md` for the full roadmap.
+Lockdown mode and password/PIN exit have been dropped - Kermit is a fun screensaver that stops a friend messing with your computer, not a security lock.
 
 ## [3.1.1] - 2026-10-16
 
