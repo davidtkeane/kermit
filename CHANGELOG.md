@@ -7,26 +7,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Planned for v3.2.0 - Security & Lock Mode
-- Timeout feature with `--timeout <minutes>` auto-exit
-- **Lockdown mode** (`--lockdown`) - True screen lock, blocks emergency exits
-- Password/PIN protection to exit
-- Block Alt-Tab, Alt-F4, Escape key in lockdown mode
-- Failed attempt logging
+### Planned
+- v3.2.0 - Friend-proofing & polish: block Cmd+Q / Escape / close button, on-screen volume and pause indicators, `--timeout`, custom message, random GIF from a folder
+- v3.3.0 - Packaging & code quality: `>=` dependency pins, `pyproject.toml`, unit tests, GitHub Actions
+- v4.0.0 - Windows support, multi-monitor, config file
 
-### Planned for v3.3.0 - Visual Feedback
-- On-screen volume indicator
-- Pause/mute overlay
-- Exit hint after inactivity
-- Loading screen and graceful error handling
+Lockdown mode and password/PIN exit have been dropped - Kermit is a fun screensaver that stops a friend messing with your computer, not a security lock. See `TODO.md` for the full roadmap.
 
-### Planned for v4.0.0 - Platform Support
-- Windows platform testing and support
-- Type hints and comprehensive docstrings
-- Logging system for debugging
-- Unit tests
+## [3.1.1] - 2026-10-16
 
-See `TODO.md` for full roadmap and security warnings.
+### Changed
+- **macOS secret exit is now Control + Command** (was Control + Option + Left Shift). Linux is unchanged: Ctrl + Alt + Left Shift
+
+### Fixed
+- **Secret exit could be triggered by tapping Ctrl, Alt and Shift one at a time.** Key-release bindings were built as `<KeyRelease->>` (the `>` key), so modifier releases were never recorded and the keys stayed "held" forever
+- A lone `P` could toggle pause once Ctrl and Alt had each been pressed at any earlier time
+- Holding `P` no longer toggles pause on and off repeatedly (auto-repeat on macOS and Linux)
+- Sound no longer overlaps itself after pause/resume
+- GIF is now centred on screen instead of pinned to the top
+- "What's the Secret?" now floats over the GIF instead of being pushed off-screen below it
+- Running `kermit.py` from another directory now finds `files/` next to the script
+- Keys held when the window loses focus no longer get stuck
+
+### Improved
+- Audio loops with `play(loops=-1)` - the background sound thread is gone
+- Each GIF frame uses its own duration (minimum 20ms)
+- GIF frames are resized with high-quality LANCZOS resampling
+- Ctrl+C in the terminal now exits cleanly
+- pygame's startup banner and `pkg_resources` warning are hidden
+
+### Technical
+- New `KeyTracker` class holds the key-combination logic, separate from Tk so it can be unit tested
+- One generic `<KeyPress>` / `<KeyRelease>` handler replaces the per-key bindings
+- Removed dead `"<Command>"` / `"<Tab>"` keysym check
 
 ## [3.1.0] - 2025-11-17
 
