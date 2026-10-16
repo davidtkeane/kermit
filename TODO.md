@@ -36,8 +36,9 @@ This document tracks planned features and improvements for the Kermit Screen Loc
 ## v3.2.0 - Friend-Proofing & Polish
 
 ### Friend-Proofing
-- [ ] Block Cmd+Q (macOS) and the window close button
-- [ ] Block Escape / Alt-F4
+- [x] Block Cmd+Q (macOS) and the window close button
+- [ ] Block Escape
+- [x] Block Alt-F4 (Linux) - handled by the close-button block
 - [ ] Keep the window on top and grab focus
 
 ### On-Screen Feedback

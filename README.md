@@ -67,6 +67,8 @@ python kermit.py --gif custom.gif --no-sound
 *   To exit:
     *   **macOS:** **(Control) ⌃ + (Command) ⌘** (v3.1.1+)
     *   **Linux:** **Ctrl + Alt + Left Shift**
+*   Cmd+Q, the Quit menu, the close button and Alt+F4 are blocked - they just show "What's the Secret?"
+*   **Emergency exit:** press **Ctrl + C** in the terminal you started Kermit from
 
 ### Pause/Resume
 

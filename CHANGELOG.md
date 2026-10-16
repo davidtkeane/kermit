@@ -7,8 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Cmd+Q and the Quit menu (macOS) no longer quit Kermit - they show "What's the Secret?" instead
+- The window close button and Alt+F4 (Linux) are blocked the same way
+- Ctrl+C in the terminal still works as an emergency exit
+
 ### Planned
-- v3.2.0 - Friend-proofing & polish: block Cmd+Q / Escape / close button, on-screen volume and pause indicators, `--timeout`, custom message, random GIF from a folder
+- v3.2.0 - Friend-proofing & polish: on-screen volume and pause indicators, `--timeout`, custom message, random GIF from a folder
 - v3.3.0 - Packaging & code quality: `>=` dependency pins, `pyproject.toml`, unit tests, GitHub Actions
 - v4.0.0 - Windows support, multi-monitor, config file
 
