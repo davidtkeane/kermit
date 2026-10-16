@@ -1,24 +1,94 @@
-# Kermit Screen Lock - Roadmap & TODO
+## Kermit Screen Lock - Roadmap & TODO
 
 This document tracks planned features and improvements for the Kermit Screen Lock project.
+
+> **Scope:** Kermit is a fun little screensaver - Kermit typing away on a keyboard, with
+> keyboard sounds looping in the background. The "lock" is there to stop a friend messing
+> with your computer while you're away, not to be a real security lock. Features are judged
+> against that: simple, fun, and hard for a friend to get out of by mashing keys.
+
+---
+
+## v3.1.1 - Bug Fixes ✅ DONE
+
+### Secret Key Combination
+- [x] Fix key-release tracking - modifier releases are bound to `<KeyRelease->>` (the `>` key), so Ctrl/Alt/Shift are never cleared and tapping them one at a time exits Kermit
+- [x] Replace per-key bindings with one generic `<KeyPress>` / `<KeyRelease>` handler
+- [x] Ignore key auto-repeat so holding `P` doesn't toggle pause on and off
+- [x] Remove dead `"<Command>"` / `"<Tab>"` check (keysyms never have angle brackets)
+
+### Sound
+- [x] Loop audio with `play(loops=-1)` / `music.play(-1)` and remove the sound thread
+- [x] Fix sound overlapping after pause/resume
+- [x] Hide the pygame "Hello from the pygame community" banner
+
+### Display
+- [x] Centre the GIF on screen (currently pinned to the top)
+- [x] Overlay the "What's the Secret?" message on the GIF so it's never pushed off-screen
+- [x] Use each GIF frame's own duration, with a minimum delay
+
+### Running
+- [x] Find `files/` relative to `kermit.py`, so it runs from any directory
+- [x] Exit cleanly on Ctrl+C in the terminal
+
+---
+
+## v3.2.0 - Friend-Proofing & Polish
+
+### Friend-Proofing
+- [ ] Block Cmd+Q (macOS) and the window close button
+- [ ] Block Escape / Alt-F4
+- [ ] Keep the window on top and grab focus
+
+### On-Screen Feedback
+- [ ] Volume level display (fade in/out on change)
+- [ ] Pause indicator
+- [ ] Mute toggle (M key) with indicator
+
+### Options
+- [ ] `--timeout <minutes>` - Auto-exit after a set time
+- [ ] `--message <text>` - Custom "What's the Secret?" text
+- [ ] `--gif-folder <path>` - Pick a random GIF from a folder
+
+---
+
+## v3.3.0 - Packaging & Code Quality
+
+### Packaging
+- [ ] Change exact pins in `requirements.txt` to `>=` (Pillow 10.3.0 has no wheels for Python 3.13+)
+- [ ] Add `pyproject.toml` so `pipx install` gives a `kermit` command
+
+### Code Quality
+- [ ] Add type hints and docstrings
+- [ ] Unit tests for the key-combination logic (no display needed)
+- [ ] GitHub Actions workflow - lint + tests
+
+---
+
+## v4.0.0 - Platforms
+
+### Windows Support
+- [ ] Test on Windows 10/11
+- [ ] Windows-specific key bindings
+- [ ] Handle Windows system keys (Win key, etc.)
+
+### Multi-Monitor
+- [ ] Black out all screens, not just the main one
+
+### Config
+- [ ] Add `config.json` or `kermit.conf` support
+- [ ] `--config <path>` - Specify config file location
+- [ ] Custom key binding configuration
 
 ---
 
 ## v3.1.0 - Configuration & Customization ✅ RELEASED
-
-### Config File Support
-- [ ] Add `config.json` or `kermit.conf` support
-- [ ] Load settings from config file on startup
-- [ ] Custom key binding configuration
-- [x] Default volume level setting (via `--volume` flag)
-- [ ] Custom message text and duration
 
 ### Command-Line Arguments
 - [x] `--gif <path>` - Use custom GIF file
 - [x] `--audio <path>` - Use custom audio file
 - [x] `--volume <0.0-1.0>` - Set initial volume
 - [x] `--no-sound` - Silent mode (no audio)
-- [ ] `--config <path>` - Specify config file location
 - [x] `--version` - Display version information
 - [x] `--help` - Show help with examples and controls
 
@@ -30,96 +100,24 @@ This document tracks planned features and improvements for the Kermit Screen Loc
 
 ---
 
-## v3.2.0 - Security & Lock Mode
+## Dropped - Out of Scope
 
-### Timeout Feature
-- [ ] `--timeout <minutes>` - Auto-exit after specified time
-- [ ] On-screen countdown timer (optional)
-- [ ] Warning before auto-exit
+These were planned as "real security" features. Kermit is a prank-proof screensaver, not a
+security lock, so they add risk (getting locked out of your own Mac) without much benefit.
 
-### Lockdown Mode (USE WITH CAUTION)
-- [ ] `--lockdown` - Disable emergency exits, true screen lock
-- [ ] Block Escape key
-- [ ] Block Alt-Tab / Cmd-Tab
-- [ ] Block Alt-F4 / Cmd-Q
-- [ ] Prevent window minimize/close
-- [ ] Only secret key combination can exit
-- [ ] Display warning on startup when lockdown is enabled
-
-### Password Protection
-- [ ] `--password` - Require password to exit
-- [ ] `--pin <4-6 digits>` - Require PIN to exit
-- [ ] Configurable max attempts before lockout
-- [ ] Log failed exit attempts
-
----
-
-## v3.3.0 - Visual Feedback & UX
-
-### On-Screen Indicators
-- [ ] Volume level display (fade in/out on change)
-- [ ] Pause indicator overlay
-- [ ] Mute indicator
-- [ ] Current time display (optional)
-
-### User Hints
-- [ ] Show exit hint after X seconds of inactivity
-- [ ] Customizable hint text
-- [ ] Fade-in hint animation
-
-### Loading & Startup
-- [ ] Loading/splash screen
-- [ ] Validate files exist before fullscreen
-- [ ] Graceful error messages (not crashes)
-
----
-
-## v4.0.0 - Platform Support & Polish
-
-### Windows Support
-- [ ] Test on Windows 10/11
-- [ ] Windows-specific key bindings
-- [ ] Handle Windows system keys (Win key, etc.)
-
-### Code Quality
-- [ ] Add type hints throughout
-- [ ] Comprehensive docstrings
-- [ ] Logging system for debugging
-- [ ] Unit tests for key functions
-
-### Documentation
-- [ ] Video demo/GIF in README
-- [ ] Installation script
-- [ ] Man page (Linux)
-
----
-
-## Security Warnings
-
-### Lockdown Mode Considerations
-
-**USE WITH EXTREME CAUTION:**
-
-1. **Risk of lockout** - If you forget the secret key combination, you may need to force restart your computer
-2. **System recovery** - Keep a note of the exit keys somewhere safe
-3. **Legal/Ethical use** - Only use on your own devices
-4. **Not for malicious purposes** - This is for personal screen lock use only
-5. **Emergency exit** - Consider always having a backup exit method
-
-**Recommended Safety Measures:**
-- Always test without `--lockdown` first
-- Use `--timeout` with lockdown mode as a safety net
-- Keep physical access to power button
-- Document your key combination somewhere secure
+- [DROPPED] `--lockdown` mode (block Alt-Tab / Cmd-Tab, disable all exits)
+- [DROPPED] `--password` / `--pin` to exit
+- [DROPPED] Max attempts before lockout, logging failed exit attempts
+- [DROPPED] Man page (Linux)
 
 ---
 
 ## Contributing
 
 Feel free to submit issues or pull requests for any of these features. Priority will be given to:
-1. Security improvements (with appropriate safeguards)
+1. Bug fixes
 2. Cross-platform compatibility
-3. User experience enhancements
+3. Fun features and user experience
 
 ---
 
@@ -129,10 +127,11 @@ Feel free to submit issues or pull requests for any of these features. Priority 
 |---------|-----------|--------|
 | 3.0.0 | Cross-platform support | ✅ Released |
 | 3.1.0 | Configuration & CLI | ✅ Released |
-| 3.2.0 | Security features | 🔄 Planned |
-| 3.3.0 | Visual feedback | 🔄 Planned |
-| 4.0.0 | Windows & polish | 🔄 Planned |
+| 3.1.1 | Bug fixes | ✅ Done |
+| 3.2.0 | Friend-proofing & polish | 🔄 Planned |
+| 3.3.0 | Packaging & code quality | 🔄 Planned |
+| 4.0.0 | Windows, multi-monitor, config | 🔄 Planned |
 
 ---
 
-*Last updated: 2025-11-17*
+*Last updated: 2026-10-16*

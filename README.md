@@ -6,7 +6,7 @@ This project brings the iconic Kermit the Frog to your screen with a fullscreen 
 [![Kermit ScreenSaver](https://img.shields.io/badge/kermit-screensaver-blue)](https://github.com/davidtkeane/kermit)
 
 ![Python](https://img.shields.io/badge/Python-3.7%2B-blue) ![License](https://img.shields.io/badge/License-MIT-green)
-![Version](https://img.shields.io/badge/Version-3.1.0-orange)
+![Version](https://img.shields.io/badge/Version-3.1.1-orange)
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/davidtkeane/kermit?style=flat-square)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/davidtkeane/kermit?authorFilter=davidtkeane)
@@ -66,9 +66,8 @@ python kermit.py --gif custom.gif --no-sound
 *   The application will launch in fullscreen mode, displaying the animated GIF and playing the sound.
 *   Press any key to see the "What's the Secret?" message for 3 seconds.
 *   To exit:
-    *   **macOS:** **(Control) ⌃ + (Option) ⌥ + Left Shift**
+    *   **macOS:** **(Control) ⌃ + (Command) ⌘** (v3.1.1+)
     *   **Linux:** **Ctrl + Alt + Left Shift**
-    *   **MacBook keyboard:** **Control + Option + Left Shift** (same keys on both platforms!)
 
 ### Pause/Resume
 
@@ -216,16 +215,23 @@ You can listen to the Kermit the Frog sound here: [kermit.mp3](files/kermit.mp3)
 
 ## Code Structure
 
-The `kermit.py` script is organized into the `KermitApp` class, which handles the various functionalities:
+The `kermit.py` script is organized into two classes:
+
+**`KeyTracker`** - tracks which keys are held down (no `tkinter` needed, so it can be tested on its own):
+
+*   `press()`: Records a key press and reports whether it completes the secret exit combination, the pause combination, a volume key, or any other key.
+*   `release()`: Records a key release.
+*   `clear()`: Forgets all held keys when the window loses focus.
+
+**`KermitApp`** - the fullscreen screensaver:
 
 *   `__init__()`: Initializes the application, loads the image and sound, creates the window, and sets up event bindings.
-*   `bind_keys()`: Binds key press and release events to their respective handler functions.
-*   `on_key_press()`, `on_key_release()`, `on_any_key_press()`: Handle key press and release events, including checking for the secret exit combination and triggering the message display.
-*   `check_secret_combination()`: Checks if the secret key combination is pressed.
-*   `play_sound_loop()`: Plays the sound file in a loop (runs in a separate thread).
+*   `bind_keys()`: Binds key press, key release and focus-out events to their handlers.
+*   `on_key_press()`, `on_key_release()`: Pass keys to the `KeyTracker` and act on the result (exit, pause, volume or show the message).
+*   `show_message()`, `hide_message()`: Show the "What's the Secret?" message for 3 seconds.
+*   `start_sound()`: Starts the sound looping forever.
 *   `update_image()`: Updates the displayed GIF frame to create the animation (called repeatedly using `tkinter`'s `after()` method).
-*   `update_message()`: Manages the display and hiding of the "What's the Secret?" message.
-*   `start()`: Starts the sound thread, the image animation, message updates, and the `tkinter` main loop.
+*   `start()`: Starts the sound, the image animation and the `tkinter` main loop.
 *   `stop()`: Stops the sound, destroys the window, and terminates the application.
 
 ## Troubleshooting
