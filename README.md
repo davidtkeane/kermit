@@ -1,6 +1,5 @@
 # Kermit the Frog Screen Lock Experience
 
-<p align="left">
 This project brings the iconic Kermit the Frog to your screen with a fullscreen animated GIF and looping MP3 audio. It's a fun little application that demonstrates how to combine multimedia elements using Python.
 
 [![Kermit ScreenSaver](https://img.shields.io/badge/kermit-screensaver-blue)](https://github.com/davidtkeane/kermit)
@@ -252,5 +251,3 @@ This project is licensed under the [MIT License](LICENSE) - see the LICENSE file
 
 
 [![Buy me a coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=&slug=davidtkeane&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff)](https://buymeacoffee.com/davidtkeane)
-
-</p>
